@@ -29,11 +29,11 @@ jobs:
 
       - name: Commit and push data
         env:
-          GH_TOKEN: ${{ secrets.C2_TOKEN }}
+          C2_TOKEN: ${{ secrets.C2_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}
+          git remote set-url origin https://x-access-token:${C2_TOKEN}@github.com/${{ github.repository }}
           git add data/
           git commit -m "Daily data for $(date +'%Y-%m-%d')" || echo "No changes to commit"
           git push
