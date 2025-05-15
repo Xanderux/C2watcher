@@ -1,0 +1,29 @@
+name : Uncover daily run
+
+on:
+  schedule:
+  - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-binary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Run binary and generate data
+        run: |
+          chmod +x ./generate.sh
+          ./generate.sh
+
+      - name: Commit and push data
+        run: |
+          git add data/
+          git commit -m "Daily data for $(date +'%Y-%m-%d')" || echo "No changes to commit"
+          git push
