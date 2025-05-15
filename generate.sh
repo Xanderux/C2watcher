@@ -7,7 +7,7 @@ mkdir -p data
 for file in ./queries/*; do
   if [ -f "$file" ]; then
     query_content=$(< "$file")
-    results=$(docker run -e ONYPHE_API_KEY="$ONYPHE_API_KEY" uncover -silent -on "$query_content")
+    results=$(.github/bin/uncover -silent -on "$query_content")
 
     basefile=$(basename "$file")
     target_file="data/$basefile"

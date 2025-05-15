@@ -12,12 +12,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Make uncover executable
+        run: chmod +x .github/bin/uncover
+
       - name: Set up Git
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
       - name: Run binary and generate data
+        env:
+          ONYPHE_API_KEY: ${{ secrets.ONYPHE_API_KEY }}
         run: |
           chmod +x ./generate.sh
           ./generate.sh
