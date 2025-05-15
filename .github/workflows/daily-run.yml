@@ -17,11 +17,11 @@ jobs:
 
       - name: Debug token presence
         run: |
-          if [ -z "$C2_TOKEN" ]; then
+          if [ -z "${C2_TOKEN}" ]; then
             echo "❌ Token is EMPTY"
             exit 1
           else
-            echo "✅ Token is present"
+            echo "✅ Token is present: ${C2_TOKEN:0:4}****"
           fi
         env:
           C2_TOKEN: ${{ secrets.C2_TOKEN }}
