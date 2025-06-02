@@ -7,7 +7,7 @@ mkdir -p data
 for file in ./queries/*; do
   if [ -f "$file" ]; then
     query_content=$(< "$file")
-    results=$(.github/bin/uncover -silent -on "$query_content" | sort -u)
+    results=$(.github/bin/uncover -silent -on "$query_content" -l 10000 | sort -u)
 
     basefile=$(basename "$file")
     target_file="data/$basefile"
