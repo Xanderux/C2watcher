@@ -17,3 +17,6 @@ for file in ./queries/*; do
     fi
   fi
 done
+
+# merged all IPs into a single file
+sort -u data/* > ips.txt
